@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lemonfish.mapper.CollectionMapper">
+
+    <update id="incrCount" parameterType="java.util.Set">
+        update lemonc.collection
+        set count = count + 1
+        where id in
+        <foreach collection="set" item="item" index="index" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </update>
+
+    <update id="decrCount" parameterType="java.util.Set">
+        update lemonc.collection
+        set count = count - 1
+        where id in
+        <foreach collection="set" item="item" index="index" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </update>
+</mapper>

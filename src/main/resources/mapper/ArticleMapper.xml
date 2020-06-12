@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lemonfish.mapper.ArticleMapper">
+
+    <update id="incrViewCount">
+        update lemonc.article
+        set view_count = view_count + 1
+        where id = #{id}
+    </update>
+    <update id="incrViewComment">
+        update lemonc.article
+        set comment_count = comment_count + #{count}
+        where id = #{id}
+    </update>
+
+    <update id="decrMulCollectCount">
+        update lemonc.article
+        set collect_count = collect_count - 1
+        where id in
+        <foreach collection="aids" item="item" close=")" open="(" separator=",">
+            #{item}
+        </foreach>
+    </update>
+    <update id="updateAllViewCount">
+        <foreach collection="map.entrySet()" item="value" index="key" separator=";">
+            update lemonc.article
+            set view_count = view_count + #{value}
+            where id = #{key}
+        </foreach>
+    </update>
+
+
+    <select id="getHottestArticles" resultType="com.lemonfish.entity.Article">
+        Select id,title,author_id,like_count,comment_count,created_time,view_count,
+        DATEDIFF(now(), created_time) * (-3)+like_count * 1 + comment_count * 0.1
+        + view_count * 0.01 + collect_count * 0.05 as hot
+        from lemonc.article
+        <where>
+            <if test="id != null">
+                id = #{id}
+            </if>
+        </where>
+        order by hot desc
+        limit #{curPage},#{size};
+    </select>
+
+    <select id="getSearchTempInfo" resultType="com.lemonfish.dto.ArticleSearchTempDTO">
+        select id,like_count,view_count,comment_count from article
+        where id in
+        <foreach collection="set" item="item" separator="," open="(" close=")">
+            #{item}
+        </foreach>
+    </select>
+
+
+</mapper>

@@ -1,0 +1,74 @@
+spring:
+  datasource:
+    username: yours
+    password: yours
+    url: yours
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  redis:
+    host: yours
+    port: 6379
+  mail:
+    username: 873310466@qq.com
+    password: iyijxfjdrrstbdbg
+    host: smtp.qq.com
+    # 开启加密验证
+    properties:
+      mail:
+        smtp:
+          ssl:
+            enable: true
+          connectiontimeout: 5000
+          timeout: 3000
+          writetimeout: 5000
+
+
+server:
+  port: 9002
+  servlet:
+    context-path: /
+
+logging:
+  file:
+    name: log/community.log
+    max-size: 20MB
+    max-history: 14
+
+
+
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+
+
+
+aliyun-oss:
+  endpoint: yours
+  accessKeyId: yours
+  accessKeySecret: yours
+  bucketName: yours
+
+
+justauth:
+  enabled: true
+  type:
+    github:
+      client-id: yours
+      client-secret: yours
+      redirect-uri: yours
+    gitee:
+      client-id: yours
+      client-secret: yours
+      redirect-uri: yours
+    baidu:
+      client-id: yours
+      client-secret: yours
+      redirect-uri: yours
+    qq:
+      client-id: yours
+      client-secret: yours
+      redirect-uri: yours
+  cache:
+    type: redis
+    prefix: 'LEMONC::'
+    timeout: 1h
