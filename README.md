@@ -15,6 +15,7 @@
 
 **`6、使用ElasticSearch完成文章高亮搜索功能（Review √）`**
 
+博客：[掘金社区](https://juejin.im/post/5edf13d16fb9a04797068bc7)
 
 ![](https://typora-imgzc.oss-cn-beijing.aliyuncs.com/typora_img/20200610212733.gif)
 
